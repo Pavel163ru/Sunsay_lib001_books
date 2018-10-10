@@ -1,13 +1,20 @@
 package com.company;
 
+
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
 
+//@XmlType(name = "bk")
 public class Book {
     private String name;
     private Date date;
     private int year;
 
     private Author author;
+
+    Book(){
+    }
 
     Book(String name, int year, Author author){
         this.name = name;

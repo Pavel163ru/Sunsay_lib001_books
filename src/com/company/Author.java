@@ -1,8 +1,14 @@
 package com.company;
 
+import javax.xml.bind.annotation.XmlType;
+
+//@XmlType(name = "a")
 public class Author {
     private String name;
     private String sex;
+
+    Author(){
+    }
 
     Author(String name){
         this.name = name;
