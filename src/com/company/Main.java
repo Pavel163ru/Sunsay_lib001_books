@@ -6,10 +6,11 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private ArrayList<Book> books;
+    private List<Book> books;
     private Book book;
     private Author author;
     private int year;
@@ -18,6 +19,7 @@ public class Main {
     private int menuMode;
 
     final static int MENU_BOOKS = 1;
+    final static int MENU_MAIN = 0;
 
     final static String MENU_MAIN_HINT = "Введите номер меню: ";
 
@@ -26,35 +28,60 @@ public class Main {
     public static void main(String[] args) {
         // write your code here
         System.out.println("Hello Sunsay =)");
-
         Main m = new Main();
+        m.mainLogic();
 
-        m.loadBooks();
+
+
+    }
+    public void mainLogic(){
+
+        /*
+        bookcase = Bookcase.getInstance();
+        //если ещё нет файла создаем макет
+        if(bookcase.isEmpty()){
+            loadBooks();
+            testXMLsave();
+        }*/
+
+
         /*
 
         System.out.print("1.Вывест список книг \n" +
                 "2.Поиск по автору \n" +
                 "3.Поиск по названию \n" +
                 "4.Добавить новую книгу \n");
-        m.menuInput(MENU_MAIN_HINT);
-        m.menu();
+        menuInput(MENU_MAIN_HINT);
+        menu();
 
-        m.newBook();
+        newBook();
         */
-        m.testXMLsave();
-        //m.testXMLload();
+
+        //testXMLload();
 
 
 
 
-        m.loadBookcase();
+        bookcase = Bookcase.open();
+        //bookcase.setBooks(new DataDriver().getBooks());
+        //bookcase.save();
+        ViewAddBook.addBook(bookcase);
 
-        m.printBooks();
-
+        menuMode = ViewBooks.bookList(bookcase);
+        if(menuMode>0){
+            int index = menuMode - 1;
+            ViewBook.bookInfo(bookcase, index);
+        }
+        Bookcase.save();
+        //printBooks();
 
     }
 
     public void printBooks() {
+        if(bookcase.isEmpty()){
+            System.out.println("Список пуст, добавте новую книгу");
+            return;
+        }
         books = bookcase.getBooks();
         for (int i = 0; i < books.size(); i++) {
             book = books.get(i);
@@ -62,13 +89,10 @@ public class Main {
         }
     }
 
+    @Deprecated
     public void loadBooks() {
         books = dataDriver.getBooks();
-        bookcase = new Bookcase(books);
-    }
-
-    public void loadBookcase(){
-        bookcase = Bookcase.getInstance();
+        //bookcase = new Bookcase(books);
     }
 
     public void menu() {
@@ -174,8 +198,6 @@ public class Main {
             e.printStackTrace();
         }
     }
-
-
 }
 
 

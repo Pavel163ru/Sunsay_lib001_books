@@ -1,14 +1,15 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataDriver {
     private Book book;
     private Author author;
-    private ArrayList<Book> books = new ArrayList<>();
+    private List<Book> books = new ArrayList<>();
 
 
-    public ArrayList<Book> getBooks(){
+    public List<Book> getBooks(){
 
         //book = new Book("Book 1", 2000, new Author("Bob1"));
         for (int i=0; i<10; i++){
@@ -18,7 +19,7 @@ public class DataDriver {
         return books;
     }
 
-    public boolean setBooks(ArrayList<Book> books){
+    public boolean setBooks(List<Book> books){
         this.books = books;
         return true;
     }
