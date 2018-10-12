@@ -28,8 +28,9 @@ public class Main {
     public static void main(String[] args) {
         // write your code here
         System.out.println("Hello Sunsay =)");
-        Main m = new Main();
-        m.mainLogic();
+        //Main m = new Main();
+        //m.mainLogic();
+        new Controller().start(Bookcase.open());
 
 
 
@@ -47,11 +48,7 @@ public class Main {
 
         /*
 
-        System.out.print("1.Вывест список книг \n" +
-                "2.Поиск по автору \n" +
-                "3.Поиск по названию \n" +
-                "4.Добавить новую книгу \n");
-        menuInput(MENU_MAIN_HINT);
+
         menu();
 
         newBook();
@@ -65,14 +62,7 @@ public class Main {
         bookcase = Bookcase.open();
         //bookcase.setBooks(new DataDriver().getBooks());
         //bookcase.save();
-        ViewAddBook.addBook(bookcase);
 
-        menuMode = ViewBooks.bookList(bookcase);
-        if(menuMode>0){
-            int index = menuMode - 1;
-            ViewBook.bookInfo(bookcase, index);
-        }
-        Bookcase.save();
         //printBooks();
 
     }
@@ -103,14 +93,7 @@ public class Main {
         }
     }
 
-    public int menuInput(String hint) {
-        System.out.print(hint);
-        Scanner in = new Scanner(System.in);
-        menuMode = in.nextInt();
-        System.out.println("menu mode = " + menuMode);
 
-        return menuMode;
-    }
 
     public void newBook() {
         Scanner in = new Scanner(System.in);
