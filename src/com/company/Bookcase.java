@@ -77,6 +77,34 @@ public class Bookcase {
         return true;
     }
 
+    public List<Book> getBooksByName(String name){
+        List<Book> findBooks = new ArrayList<>();
+
+        for(int i=0; i<books.size(); i++){
+            if(name.equalsIgnoreCase(books.get(i).getName())){
+                findBooks.add(books.get(i));
+            }
+        }
+
+        return findBooks;
+    }
+
+    public List<Book> getBooksByAuthor(String author){
+        List<Book> findBooks = new ArrayList<>();
+
+        for(int i=0; i<books.size(); i++){
+            if(author.equalsIgnoreCase(books.get(i).getAuthor().getName())){
+                findBooks.add(books.get(i));
+            }
+        }
+
+        return findBooks;
+    }
+
+    public boolean deleteThisBook(Book book){
+        return books.remove(book);
+    }
+
 
     public boolean isEmpty(){
         if(books!=null){

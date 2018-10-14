@@ -3,6 +3,7 @@ package com.company;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class DataDriver {
     private Book book;
     private Author author;
