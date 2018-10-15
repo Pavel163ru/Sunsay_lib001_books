@@ -27,7 +27,9 @@ public class Main {
         // write your code here
         System.out.println("Hello Sunsay =)");
 
-        new Controller().start(Bookcase.open());
+        //new Controller().start(Bookcase.open());
+        new newController(Bookcase.open()).start();
+
 
 
 
