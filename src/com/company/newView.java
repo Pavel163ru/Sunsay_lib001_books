@@ -44,14 +44,13 @@ public class newView {
         Scanner input = new Scanner(System.in);
         do {
             menu = input.nextInt();
-            System.out.println((menu<=books.size() ? "":"Ошибка ввода, повторите попытку"));
-        }while (menu>books.size());
+            System.out.println((menu <= books.size() ? "":"Ошибка ввода, повторите попытку"));
+        }while (menu > books.size());
 
-        if(menu>0){
-            controller.setCurrentBookId(menu-1);
-            controller.setCommand(newController.M_LIST);
+        if(menu > 0){
+            controller.orderViewBook(books.get(menu-1));
         }else{
-            controller.setCommand(newController.M_MAIN);
+            controller.orderViewMainMenu();
         }
     }
     public void addBook(){
@@ -67,6 +66,79 @@ public class newView {
 
         controller.addBook(book);
         System.out.println("Книга успешно добавлена, прощай человек");
-        controller.setCommand(newController.M_MAIN);
+        controller.orderViewMainMenu();
     }
+
+    public void searchBookName(){
+        String name;
+
+        System.out.println("-Поиск книг-");
+        Scanner input = new Scanner(System.in);
+        System.out.println("Введите название книги:");
+        name = input.nextLine();
+
+        controller.setCurrentBooksByName(name);
+        controller.orderViewCurrentList();
+    }
+    public void searchBookAuthor(){
+        String name;
+
+        System.out.println("-Поиск книг-");
+        Scanner input = new Scanner(System.in);
+        System.out.println("Введите имя автора:");
+        name = input.nextLine();
+
+        controller.setCurrentBooksByAuthor(name);
+        controller.orderViewCurrentList();
+    }
+    public void exit(){
+        System.out.println("...Завершение работы, не выключайте компьютер");
+    }
+    public void info(Book book){
+        System.out.println("Название книги: "+ book.getName());
+        System.out.println("Автор: "+ book.getAuthor().getName());
+        System.out.println("Год: "+ book.getYear());
+
+        System.out.println("Введите: 0-главное меню; 1-редактировать; 2-удалить");
+        Scanner input = new Scanner(System.in);
+        int command;
+        boolean isCorrect;
+        do {
+            command = input.nextInt();
+            isCorrect = command >= 0 && command <= 2;
+            System.out.println(isCorrect ? "":"Ошибка ввода, повторите попытку");
+        }while (!isCorrect);
+
+        switch (command){
+            case 0:
+                controller.orderViewMainMenu();
+                break;
+            case 1:
+                controller.orderViewBookEdit(book);
+                break;
+            case 2:
+                controller.delBook(book);
+                System.out.println("...Книга удалена");
+                controller.orderViewMainMenu();
+                break;
+        }
+    }
+    public void editBook(Book book){
+        System.out.println("Редактирование книги");
+
+        Scanner input = new Scanner(System.in);
+        System.out.println("Введите название книги:");
+        book.setName(input.nextLine());
+        System.out.println("Введите имя автора:");
+        book.setAuthor(new Author(input.nextLine()));
+        System.out.println("Введите год выпуска:");
+        book.setYear(input.nextInt());
+
+        controller.save();
+        System.out.println("...Книга успешно изменена");
+        controller.orderViewBook(book);
+
+
+    }
+
 }
