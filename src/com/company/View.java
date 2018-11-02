@@ -3,10 +3,10 @@ package com.company;
 import java.util.List;
 import java.util.Scanner;
 
-public class newView {
-    newController controller;
+public class View {
+    Controller controller;
 
-    newView(newController controller){
+    View(Controller controller){
         this.controller = controller;
     }
 
