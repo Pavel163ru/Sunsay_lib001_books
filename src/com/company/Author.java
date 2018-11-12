@@ -7,10 +7,10 @@ public class Author {
     private String name;
     private String sex;
 
-    Author(){
+    public Author(){
     }
 
-    Author(String name){
+    public Author(String name){
         this.name = name;
     }
 

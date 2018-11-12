@@ -1,11 +1,13 @@
 package com.company;
 
+import com.company.views.*;
+
 import java.util.List;
 
 public class Controller {
     public static final int M_MAIN = 10;
     public static final int M_LIST = 1;
-    public static final int M_SEBOOK = 2;
+    public static final int M_SEARCH_BOOK = 2;
     public static final int M_SEARCH_AUTHOR = 3;
     public static final int M_ADD = 4;
     public static final int M_CURRENT = 5;
@@ -33,34 +35,44 @@ public class Controller {
         while (isLoop){
             switch (command){
                 case M_EXIT: //quit
-                    showExit();
+                    //showExit();
+                    new ExitView(this).display();
                     exit();
                     break;
                 case M_MAIN: //main menu
-                    showMainMenu();
+                    //showMainMenu();
+                    new MainMenuView(this).display();
                     break;
                 case M_LIST: //print list books
-                    showBooksList();
+                    //showBooksList();
+                    new ListBooksView(this, bookcase.getBooks()).display();
                     break;
-                case M_SEBOOK:
-                    showSearchBookName();
+                case M_SEARCH_BOOK:
+                    //showSearchBookName();
+                    new SearchBookNameView(this).display();
                     break;
                 case M_SEARCH_AUTHOR:
-                    showSearchBookAuthor();
+                    //showSearchBookAuthor();
+                    new SearchBookAuthorView(this).display();
                     break;
                 case M_CURRENT:
-                    showCurrentList();
+                    //showCurrentList();
+                    new ListBooksView(this, currentBooks).display();
                     break;
                 case M_ADD: //add new book
-                    showBookAdd();
+                    //showBookAdd();
+                    new AddBookView(this).display();
                     break;
                 case M_INFO:
-                    showBookInfo();
+                    //showBookInfo();
+                    new BookInfoView(this, currentBook).display();
                     break;
                 case M_EDIT:
-                    showBookEdit();
+                    //showBookEdit();
+                    new EditBookView(this, currentBook).display();
                     break;
-
+                default:
+                    throw new UnsupportedOperationException("State machine error");
             }
         }
     }
@@ -95,7 +107,7 @@ public class Controller {
 
 
     public void orderViewSearchBooks(){
-        command = M_SEBOOK;
+        command = M_SEARCH_BOOK;
     }
     public void orderViewMainMenu(){
         command = M_MAIN;
@@ -118,7 +130,6 @@ public class Controller {
     public void setCurrentBooksByName(String name){
         currentBooks = bookcase.getBooksByName(name);
     }
-
     public void setCurrentBooksByAuthor(String name){
         currentBooks = bookcase.getBooksByAuthor(name);
     }
@@ -131,11 +142,9 @@ public class Controller {
         bookcase.deleteThisBook(book);
         bookcase.save();
     }
-
     public void save(){
         bookcase.save();
     }
-
     public void exit(){
         isLoop = false;
     }

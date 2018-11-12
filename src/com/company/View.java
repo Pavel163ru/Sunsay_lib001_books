@@ -23,7 +23,6 @@ public class View {
         int command = in.nextInt();
         controller.setCommand(command);
     }
-
     public void listBooks(List<Book> books){
         if(books.isEmpty()){
             System.out.println("Список пуст, добавте новую книгу");
@@ -68,7 +67,6 @@ public class View {
         System.out.println("Книга успешно добавлена, прощай человек");
         controller.orderViewMainMenu();
     }
-
     public void searchBookName(){
         String name;
 
