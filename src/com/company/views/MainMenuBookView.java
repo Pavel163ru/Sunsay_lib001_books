@@ -4,8 +4,8 @@ import com.company.Controller;
 
 import java.util.Scanner;
 
-public class MainMenuView extends AbstractView implements Displayable{
-    public MainMenuView(Controller controller) {
+public class MainMenuBookView extends AbstractBookView implements Displayable{
+    public MainMenuBookView(Controller controller) {
         super(controller);
     }
 
@@ -21,6 +21,21 @@ public class MainMenuView extends AbstractView implements Displayable{
         System.out.print("Введите команду: ");
         Scanner in = new Scanner(System.in);
         int command = in.nextInt();
-        controller.setCommand(command);
+        switch(command){
+            case Controller.M_LIST:
+                controller.showBooksList();
+                break;
+            case Controller.M_SEARCH_BOOK:
+                controller.showSearchBookName();
+                break;
+            case Controller.M_SEARCH_AUTHOR:
+                controller.showSearchBookAuthor();
+                break;
+            case Controller.M_ADD:
+                controller.showBookAdd();
+                break;
+            default:
+                controller.showExit();
+        }
     }
 }

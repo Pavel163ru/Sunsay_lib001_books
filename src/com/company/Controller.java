@@ -16,116 +16,45 @@ public class Controller {
     public static final int M_EXIT = 0;
 
     Bookcase bookcase;
-    boolean isLoop;
-    int command;
+
     private int currentBookId;
     private List<Book> currentBooks;
     private Book currentBook;
-    private String bookName;
-    private String authorName;
+
 
     Controller(Bookcase bookcase){
         this.bookcase = bookcase;
     }
 
-    public void start(){
-        isLoop = true;
-        command = M_MAIN;
-
-        while (isLoop){
-            switch (command){
-                case M_EXIT: //quit
-                    //showExit();
-                    new ExitView(this).display();
-                    exit();
-                    break;
-                case M_MAIN: //main menu
-                    //showMainMenu();
-                    new MainMenuView(this).display();
-                    break;
-                case M_LIST: //print list books
-                    //showBooksList();
-                    new ListBooksView(this, bookcase.getBooks()).display();
-                    break;
-                case M_SEARCH_BOOK:
-                    //showSearchBookName();
-                    new SearchBookNameView(this).display();
-                    break;
-                case M_SEARCH_AUTHOR:
-                    //showSearchBookAuthor();
-                    new SearchBookAuthorView(this).display();
-                    break;
-                case M_CURRENT:
-                    //showCurrentList();
-                    new ListBooksView(this, currentBooks).display();
-                    break;
-                case M_ADD: //add new book
-                    //showBookAdd();
-                    new AddBookView(this).display();
-                    break;
-                case M_INFO:
-                    //showBookInfo();
-                    new BookInfoView(this, currentBook).display();
-                    break;
-                case M_EDIT:
-                    //showBookEdit();
-                    new EditBookView(this, currentBook).display();
-                    break;
-                default:
-                    throw new UnsupportedOperationException("State machine error");
-            }
-        }
+    public void showExit(){
+        new ExitBookView(this).display();
     }
-
-    private void showExit(){
-        new View(this).exit();
+    public void showSearchBookName(){
+        new SearchBookNameBookView(this).display();
     }
-    private void showSearchBookName(){
-        new View(this).searchBookName();
+    public void showSearchBookAuthor(){
+        new SearchBookAuthorBookView(this).display();
     }
-    private void showSearchBookAuthor(){
-        new View(this).searchBookAuthor();
+    public void showCurrentList(){
+        new ListBooksBookView(this, currentBooks).display();
     }
-    private void showCurrentList(){
-        new View(this).listBooks(currentBooks);
+    public void showBookAdd(){
+        new AddBookBookView(this).display();
     }
-    private void showBookAdd(){
-        new View(this).addBook();
+    public void showBooksList(){
+        new ListBooksBookView(this, bookcase.getBooks()).display();
     }
-    private void showBooksList(){
-        new View(this).listBooks(bookcase.getBooks());
+    public void showMainMenu(){
+        new MainMenuBookView(this).display();
     }
-    private void showMainMenu(){
-        new View(this).mainMenu();
-    }
-    private void showBookInfo(){
-        new View(this).info(currentBook);
-    }
-    private void showBookEdit(){
-        new View(this).editBook(currentBook);
-    }
-
-
-    public void orderViewSearchBooks(){
-        command = M_SEARCH_BOOK;
-    }
-    public void orderViewMainMenu(){
-        command = M_MAIN;
-    }
-    public void orderViewBooksList (){
-        command = M_LIST;
-    }
-    public void orderViewCurrentList (){
-        command = M_CURRENT;
-    }
-    public void orderViewBook(Book book){
+    public void showBookInfo(Book book){
         currentBook = book;
-        command = M_INFO;
+        new BookInfoBookView(this, currentBook).display();
     }
-    public void orderViewBookEdit(Book book){
-        command = M_EDIT;
+    public void showBookEdit(Book book){
+        currentBook = book;
+        new EditBookBookView(this, currentBook).display();
     }
-
 
     public void setCurrentBooksByName(String name){
         currentBooks = bookcase.getBooksByName(name);
@@ -144,13 +73,6 @@ public class Controller {
     }
     public void save(){
         bookcase.save();
-    }
-    public void exit(){
-        isLoop = false;
-    }
-
-    public void setCommand(int command){
-        this.command = command;
     }
 
     public int getCurrentBookId() {

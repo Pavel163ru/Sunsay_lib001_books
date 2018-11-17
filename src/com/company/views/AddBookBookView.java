@@ -6,17 +6,15 @@ import com.company.Controller;
 
 import java.util.Scanner;
 
-public class EditBookView extends AbstractView implements Displayable {
-    Book book;
-    public EditBookView(Controller controller, Book book) {
+public class AddBookBookView extends AbstractBookView implements Displayable {
+    public AddBookBookView(Controller controller) {
         super(controller);
-        this.book = book;
     }
 
     @Override
     public void display() {
-        System.out.println("Редактирование книги");
-
+        System.out.println("Добавление новой книги");
+        Book book = new Book();
         Scanner input = new Scanner(System.in);
         System.out.println("Введите название книги:");
         book.setName(input.nextLine());
@@ -25,8 +23,8 @@ public class EditBookView extends AbstractView implements Displayable {
         System.out.println("Введите год выпуска:");
         book.setYear(input.nextInt());
 
-        controller.save();
-        System.out.println("...Книга успешно изменена");
-        controller.orderViewBook(book);
+        controller.addBook(book);
+        System.out.println("Книга успешно добавлена, прощай человек");
+        controller.showMainMenu();
     }
 }

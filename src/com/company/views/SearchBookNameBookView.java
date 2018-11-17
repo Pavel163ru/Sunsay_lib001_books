@@ -4,8 +4,8 @@ import com.company.Controller;
 
 import java.util.Scanner;
 
-public class SearchBookNameView extends AbstractView implements Displayable {
-    public SearchBookNameView(Controller controller) {
+public class SearchBookNameBookView extends AbstractBookView implements Displayable {
+    public SearchBookNameBookView(Controller controller) {
         super(controller);
     }
 
@@ -19,6 +19,6 @@ public class SearchBookNameView extends AbstractView implements Displayable {
         name = input.nextLine();
 
         controller.setCurrentBooksByName(name);
-        controller.orderViewCurrentList();
+        controller.showCurrentList();
     }
 }

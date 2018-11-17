@@ -5,10 +5,9 @@ import com.company.Controller;
 
 import java.util.Scanner;
 
-public class BookInfoView extends AbstractView implements Displayable {
-    Book book;
+public class BookInfoBookView extends AbstractBookView implements Displayable {
 
-    public BookInfoView(Controller controller, Book book) {
+    public BookInfoBookView(Controller controller, Book book) {
         super(controller);
         this.book = book;
     }
@@ -31,15 +30,15 @@ public class BookInfoView extends AbstractView implements Displayable {
 
         switch (command){
             case 0:
-                controller.orderViewMainMenu();
+                controller.showMainMenu();
                 break;
             case 1:
-                controller.orderViewBookEdit(book);
+                controller.showBookEdit(book);
                 break;
             case 2:
                 controller.delBook(book);
                 System.out.println("...Книга удалена");
-                controller.orderViewMainMenu();
+                controller.showMainMenu();
                 break;
         }
     }

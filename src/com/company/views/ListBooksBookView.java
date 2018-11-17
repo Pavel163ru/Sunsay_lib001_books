@@ -6,10 +6,10 @@ import com.company.Controller;
 import java.util.List;
 import java.util.Scanner;
 
-public class ListBooksView extends AbstractView implements Displayable {
-    List<Book> books;
+public class ListBooksBookView extends AbstractBookView implements Displayable {
 
-    public ListBooksView(Controller controller, List<Book> books) {
+
+    public ListBooksBookView(Controller controller, List<Book> books) {
         super(controller);
         this.books = books;
     }
@@ -39,9 +39,9 @@ public class ListBooksView extends AbstractView implements Displayable {
         }while (menu > books.size());
 
         if(menu > 0){
-            controller.orderViewBook(books.get(menu-1));
+            controller.showBookInfo(books.get(menu-1));
         }else{
-            controller.orderViewMainMenu();
+            controller.showMainMenu();
         }
     }
 }

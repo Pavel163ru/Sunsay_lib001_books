@@ -2,8 +2,8 @@ package com.company.views;
 
 import com.company.Controller;
 
-public class ExitView extends AbstractView implements Displayable {
-    public ExitView(Controller controller) {
+public class ExitBookView extends AbstractBookView implements Displayable {
+    public ExitBookView(Controller controller) {
         super(controller);
     }
 
